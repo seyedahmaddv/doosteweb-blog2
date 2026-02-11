@@ -1,0 +1,7 @@
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v36.0.1/dist/font-face.css');
+
+html { overflow-y: scroll; direction: rtl; }
+
+body {
+	font-family: "Vazirmatn", "Vazir", "IRANSans", Tahoma, sans-serif;
+}
