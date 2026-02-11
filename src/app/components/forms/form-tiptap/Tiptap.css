@@ -1,5 +1,13 @@
-   .MuiTiptap-FieldContainer-root{
-    min-height: 250px;
-   }
-  
-  
+.MuiTiptap-FieldContainer-root {
+  min-height: 250px;
+}
+
+.form-tiptap-editor {
+  line-height: 1.8;
+}
+
+.form-tiptap-editor::selection,
+.form-tiptap-editor *::selection {
+  background: rgba(25, 118, 210, 0.25);
+  color: inherit;
+}

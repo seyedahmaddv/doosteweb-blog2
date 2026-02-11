@@ -1,8 +1,14 @@
 "use client";
 
+import type { MouseEvent } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { Box, Button, Stack } from "@mui/material";
+import "./Tiptap.css";
+
+const preventEditorBlur = (event: MouseEvent<HTMLButtonElement>) => {
+  event.preventDefault();
+};
 
 const TiptapEditor = () => {
   const editor = useEditor({
@@ -19,7 +25,13 @@ const TiptapEditor = () => {
         },
       }),
     ],
-    content: "<p>Type here...</p>",
+    content: "<p>اینجا بنویسید...</p>",
+    editorProps: {
+      attributes: {
+        class: "form-tiptap-editor",
+        dir: "rtl",
+      },
+    },
   });
 
   if (!editor) {
@@ -30,18 +42,21 @@ const TiptapEditor = () => {
     <Box>
       <Stack direction="row" spacing={1} mb={2} flexWrap="wrap">
         <Button
+          onMouseDown={preventEditorBlur}
           variant={editor.isActive("heading", { level: 1 }) ? "contained" : "outlined"}
           onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
         >
           H1
         </Button>
         <Button
+          onMouseDown={preventEditorBlur}
           variant={editor.isActive("heading", { level: 2 }) ? "contained" : "outlined"}
           onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
         >
           H2
         </Button>
         <Button
+          onMouseDown={preventEditorBlur}
           variant={editor.isActive("bold") ? "contained" : "outlined"}
           onClick={() => editor.chain().focus().toggleBold().run()}
           disabled={!editor.can().chain().focus().toggleBold().run()}
@@ -49,6 +64,7 @@ const TiptapEditor = () => {
           Bold
         </Button>
         <Button
+          onMouseDown={preventEditorBlur}
           variant={editor.isActive("italic") ? "contained" : "outlined"}
           onClick={() => editor.chain().focus().toggleItalic().run()}
           disabled={!editor.can().chain().focus().toggleItalic().run()}
@@ -56,6 +72,7 @@ const TiptapEditor = () => {
           Italic
         </Button>
         <Button
+          onMouseDown={preventEditorBlur}
           variant={editor.isActive("strike") ? "contained" : "outlined"}
           onClick={() => editor.chain().focus().toggleStrike().run()}
           disabled={!editor.can().chain().focus().toggleStrike().run()}
@@ -63,37 +80,51 @@ const TiptapEditor = () => {
           Strike
         </Button>
         <Button
+          onMouseDown={preventEditorBlur}
           variant={editor.isActive("bulletList") ? "contained" : "outlined"}
           onClick={() => editor.chain().focus().toggleBulletList().run()}
         >
-          Bullet list
+          بولت
         </Button>
         <Button
+          onMouseDown={preventEditorBlur}
           variant={editor.isActive("orderedList") ? "contained" : "outlined"}
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
         >
-          Ordered list
+          شماره‌دار
         </Button>
         <Button
+          onMouseDown={preventEditorBlur}
           variant={editor.isActive("blockquote") ? "contained" : "outlined"}
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
         >
-          Blockquote
+          Quote
         </Button>
         <Button
+          onMouseDown={preventEditorBlur}
           variant={editor.isActive("codeBlock") ? "contained" : "outlined"}
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
         >
-          Code block
+          Code
         </Button>
-        <Button onClick={() => editor.chain().focus().setHorizontalRule().run()}>HR</Button>
-        <Button onClick={() => editor.chain().focus().undo().run()} disabled={!editor.can().undo()}>
+        <Button onMouseDown={preventEditorBlur} onClick={() => editor.chain().focus().setHorizontalRule().run()}>
+          HR
+        </Button>
+        <Button
+          onMouseDown={preventEditorBlur}
+          onClick={() => editor.chain().focus().undo().run()}
+          disabled={!editor.can().undo()}
+        >
           Undo
         </Button>
-        <Button onClick={() => editor.chain().focus().redo().run()} disabled={!editor.can().redo()}>
+        <Button
+          onMouseDown={preventEditorBlur}
+          onClick={() => editor.chain().focus().redo().run()}
+          disabled={!editor.can().redo()}
+        >
           Redo
         </Button>
-        <Button onClick={() => editor.chain().focus().clearNodes().unsetAllMarks().run()}>
+        <Button onMouseDown={preventEditorBlur} onClick={() => editor.chain().focus().clearNodes().unsetAllMarks().run()}>
           Clear
         </Button>
       </Stack>
